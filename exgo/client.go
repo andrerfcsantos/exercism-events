@@ -6,7 +6,6 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
-	"os"
 )
 
 const API_BASE_URL = "https://exercism.org/api/v2"
@@ -19,7 +18,11 @@ type Client struct {
 }
 
 func New() (*Client, error) {
-	return NewWithToken(os.Getenv("EXERCISM_TOKEN"))
+	token, err := findToken()
+	if err != nil {
+		return nil, err
+	}
+	return NewWithToken(token)
 }
 
 func NewWithToken(token string) (*Client, error) {

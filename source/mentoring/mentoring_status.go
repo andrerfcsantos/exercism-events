@@ -1,4 +1,4 @@
-package track
+package mentoring
 
 import "github.com/andrerfcsantos/exercism-events/exgo"
 
