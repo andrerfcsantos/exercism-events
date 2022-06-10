@@ -1,6 +1,8 @@
 package mentoring
 
-import "github.com/andrerfcsantos/exercism-events/exgo"
+import (
+	"github.com/andrerfcsantos/exercism-events/exgo"
+)
 
 type MentoringStatus struct {
 	requests map[string]exgo.MentoringRequest

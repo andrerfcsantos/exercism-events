@@ -27,6 +27,7 @@ func (f *Forwarder) Start() error {
 		go c.Start(consumerChan)
 	}
 
+	fmt.Printf("[Forwarder] Listening from %d sources\n", len(f.sources))
 	for _, s := range f.sources {
 		go func(source source.Source) {
 			ch, err := source.Start()

@@ -67,9 +67,9 @@ func (s *MentoringEventSource) handleTrack(track_slug string, ch chan any) {
 		select {
 		case <-s.ctx.Done():
 			return
-		case <-time.After(time.Second * 10):
-
+		case <-time.After(time.Second * 5):
 		}
+
 		req, err := client.GetAllMentoringRequests(track_slug)
 		if err != nil {
 			fmt.Printf("[Mentoring Requests] error getting mentoring requests: %v", err)

@@ -12,6 +12,7 @@ import (
 	"github.com/andrerfcsantos/exercism-events/forward"
 	"github.com/andrerfcsantos/exercism-events/source"
 	"github.com/andrerfcsantos/exercism-events/source/mentoring"
+	"github.com/andrerfcsantos/exercism-events/source/notifications"
 )
 
 var wordPtr *string
@@ -25,12 +26,21 @@ func main() {
 	flag.Parse()
 	track_slugs := strings.Split(*wordPtr, ",")
 
+	// Sources
 	mentoringSource := mentoring.NewMentoringEventSource(track_slugs...)
+	notificationSource := notifications.NewNotificationEventSource()
+
+	// Consumers
 	notifierConsumer := desktopnotifier.NewDesktopNotifier()
 
 	fw := forward.NewForwarder(
-		[]source.Source{mentoringSource},
-		[]consumer.Consumer{notifierConsumer},
+		[]source.Source{
+			mentoringSource,
+			notificationSource,
+		},
+		[]consumer.Consumer{
+			notifierConsumer,
+		},
 	)
 
 	err := fw.Start()
