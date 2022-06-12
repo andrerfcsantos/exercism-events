@@ -34,6 +34,7 @@ Available Flags:
             (default: notifications,mentoring)
 -consumers  Comma-separated list of event consumers that will be activated.
             (default: desktopnotifier)
+-pushovertracks
 ```
 
 ### Examples
@@ -93,4 +94,10 @@ Currently only postgres databases are supported.
 
 In addition to setting the environment variables, [liquibase](https://www.liquibase.org/) migrations in the file `liquibase/master.xml` must also be run before running the program. Please refer to the liquibase documentation on how to do this.
 
+* **pushover** - Sends notifications to [pushover](https://pushover.net/). Pass the key `pushover` to the `-consumers` flag to activate this consumer.
+
+For this consumer to work, you must set these environment variables:
+
+- `PUSHOVER_TOKEN` - Your App Token. You must create an application in pushover to get this token.
+- `PUSHOVER_USER` - Your pushover User Key.
 

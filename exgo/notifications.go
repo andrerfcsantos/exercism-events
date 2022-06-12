@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-type NoticiationsResults struct {
+type NotificationsResults struct {
 	Results []Notification    `json:"results"`
 	Meta    NotificationsMeta `json:"meta"`
 }
@@ -21,19 +21,19 @@ type Notification struct {
 	IsRead    bool      `json:"is_read"`
 }
 
-type Links struct {
+type NotificationLinks struct {
 	All string `json:"all"`
 }
 
 type NotificationsMeta struct {
-	CurrentPage int   `json:"current_page"`
-	TotalCount  int   `json:"total_count"`
-	TotalPages  int   `json:"total_pages"`
-	Links       Links `json:"links"`
-	UnreadCount int   `json:"unread_count"`
+	CurrentPage int               `json:"current_page"`
+	TotalCount  int               `json:"total_count"`
+	TotalPages  int               `json:"total_pages"`
+	Links       NotificationLinks `json:"links"`
+	UnreadCount int               `json:"unread_count"`
 }
 
-func (c *Client) GetNotifications(page int, perPage int) (*NoticiationsResults, error) {
+func (c *Client) GetNotifications(page int, perPage int) (*NotificationsResults, error) {
 	req, err := c.performRequest(
 		"GET",
 		fmt.Sprintf("/notifications?page=%d&per_page=%d&order=unread_first", page, perPage),
@@ -44,7 +44,7 @@ func (c *Client) GetNotifications(page int, perPage int) (*NoticiationsResults, 
 		return nil, fmt.Errorf("getting notifications: %w", err)
 	}
 
-	var notifications NoticiationsResults
+	var notifications NotificationsResults
 	err = json.Unmarshal(req, &notifications)
 	if err != nil {
 		return nil, fmt.Errorf("unmarshalling notifications: %w", err)
@@ -53,8 +53,8 @@ func (c *Client) GetNotifications(page int, perPage int) (*NoticiationsResults, 
 	return &notifications, nil
 }
 
-func (c *Client) GetAllUnreadNotifications() (*NoticiationsResults, error) {
-	var notifications NoticiationsResults
+func (c *Client) GetAllUnreadNotifications() (*NotificationsResults, error) {
+	var notifications NotificationsResults
 
 	current_page := 1
 outer:
