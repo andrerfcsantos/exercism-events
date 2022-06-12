@@ -84,12 +84,16 @@ func (d *DesktopNotifier) handleEvent(event interface{}) {
 		fmt.Printf("[Desktop Notifier] %s: %s\n", title, description)
 
 	case events.NotificationEvent:
-		title := "New Notification"
-		err := beeep.Notify(title, ev.Notification.Text, "assets/exercism.png")
-		if err != nil {
-			fmt.Printf("could not send notification of exercism notification: %s\n", err.Error())
+
+		switch ev.Type {
+		case events.NotificationAdded:
+			title := "New Notification"
+			err := beeep.Notify(title, ev.Notification.Text, "assets/exercism.png")
+			if err != nil {
+				fmt.Printf("could not send notification of exercism notification: %s\n", err.Error())
+			}
+			fmt.Printf("[Desktop Notifier] %s: %s\n", title, ev.Notification.Text)
 		}
-		fmt.Printf("[Desktop Notifier] %s: %s\n", title, ev.Notification.Text)
 	}
 
 }
