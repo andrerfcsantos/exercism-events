@@ -72,7 +72,7 @@ func (c *Client) GetAllMentoringRequests(track_slug string) (*MentoringRequestsR
 	return &mentoringRequests, nil
 }
 
-type MentoringTracks struct {
+type MentoringTracksResult struct {
 	Tracks []MentoringTrack `json:"tracks"`
 }
 
@@ -89,7 +89,7 @@ type MentoringTrack struct {
 	Links              MentoringTrackLinks `json:"links"`
 }
 
-func (c *Client) GetAllMentoringTracks() (*MentoringTrack, error) {
+func (c *Client) GetAllMentoringTracks() (*MentoringTracksResult, error) {
 	req, err := c.performRequest(
 		"GET",
 		"/mentoring/tracks?page=1&per_page=100",
@@ -99,7 +99,7 @@ func (c *Client) GetAllMentoringTracks() (*MentoringTrack, error) {
 		return nil, fmt.Errorf("getting tracks: %w", err)
 	}
 
-	var result MentoringTrack
+	var result MentoringTracksResult
 	err = json.Unmarshal(req, &result)
 	if err != nil {
 		return nil, fmt.Errorf("unmarshalling tracks: %w", err)
