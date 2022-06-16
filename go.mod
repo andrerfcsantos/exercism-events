@@ -4,6 +4,7 @@ go 1.18
 
 require (
 	github.com/gen2brain/beeep v0.0.0-20220518085355-d7852edf42fc
+	github.com/gregdel/pushover v1.1.0
 	gorm.io/driver/postgres v1.3.7
 	gorm.io/gorm v1.23.6
 )
@@ -11,7 +12,6 @@ require (
 require (
 	github.com/go-toast/toast v0.0.0-20190211030409-01e6764cf0a4 // indirect
 	github.com/godbus/dbus/v5 v5.1.0 // indirect
-	github.com/gregdel/pushover v1.1.0 // indirect
 	github.com/jackc/chunkreader/v2 v2.0.1 // indirect
 	github.com/jackc/pgconn v1.12.1 // indirect
 	github.com/jackc/pgio v1.0.0 // indirect
