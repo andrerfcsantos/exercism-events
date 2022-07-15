@@ -28,3 +28,4 @@ exercism-events-dev
 dist/
 
 .vscode
+.idea
