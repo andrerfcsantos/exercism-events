@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"log"
 	"os"
 	"os/signal"
 	"strings"
@@ -15,6 +14,8 @@ import (
 	"github.com/andrerfcsantos/exercism-events/source"
 	"github.com/andrerfcsantos/exercism-events/source/mentoring"
 	"github.com/andrerfcsantos/exercism-events/source/notifications"
+
+	log "github.com/sirupsen/logrus"
 )
 
 var (
@@ -104,12 +105,19 @@ func GetConsumers(flagInfo FlagInfo) []consumer.Consumer {
 func main() {
 	flagInfo := ParseFlags()
 
+	file, err := os.OpenFile("logs.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+	if err == nil {
+		log.SetOutput(file)
+	} else {
+		log.Info("Failed to log to file, using default stderr")
+	}
+
 	sources := GetSources(flagInfo)
 	consumers := GetConsumers(flagInfo)
 
 	fw := forward.NewForwarder(sources, consumers)
 
-	err := fw.Start()
+	err = fw.Start()
 	if err != nil {
 		log.Fatal(err)
 	}

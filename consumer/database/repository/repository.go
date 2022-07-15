@@ -7,6 +7,8 @@ import (
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+
+	log "github.com/sirupsen/logrus"
 )
 
 type MentoringRequest struct {
@@ -25,8 +27,23 @@ type Repository struct {
 	db *gorm.DB
 }
 
+func (r *Repository) Database() *gorm.DB {
+	db, err := r.db.DB()
+	if err != nil {
+		log.Errorf("getting database session in Database(): %v", err)
+	}
+
+	errPing := db.Ping()
+	for errPing != nil {
+		log.Errorf("could not ping database in Database(): %v", err)
+		time.Sleep(time.Second * 5)
+		errPing = db.Ping()
+	}
+	return r.db
+}
+
 func (r *Repository) SaveMentoringRequest(request MentoringRequest) error {
-	return r.db.
+	return r.Database().
 		Table("mentoring_requests").
 		Create(&request).Error
 }
