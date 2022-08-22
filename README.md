@@ -28,13 +28,14 @@ exercism-events [flags]
 
 Available Flags:
 
--tracks     Comma-separated list of tracks for which to track mentoring requests.
-            (default: tracks the user is mentor of)
--sources    Comma-separated list of event sources that will be activated.
-            (default: notifications,mentoring)
--consumers  Comma-separated list of event consumers that will be activated.
-            (default: desktopnotifier)
--pushovertracks
+-tracks         Comma-separated list of tracks for which to track mentoring requests.
+                (default: tracks the user is mentor of)
+-sources        Comma-separated list of event sources that will be activated.
+                (default: notifications,mentoring)
+-consumers      Comma-separated list of event consumers that will be activated.
+                (default: desktopnotifier)
+-pushovertracks Comma-separated list of track titles for which to send events to pushover.
+                (default: all the events of the tracks produced by the sources)
 ```
 
 ### Examples
