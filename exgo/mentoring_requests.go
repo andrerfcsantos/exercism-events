@@ -12,16 +12,25 @@ type MentoringRequestsResults struct {
 }
 
 type MentoringRequest struct {
-	UUID                   string    `json:"uuid"`
-	TrackTitle             string    `json:"track_title"`
-	ExerciseIconURL        string    `json:"exercise_icon_url"`
-	ExerciseTitle          string    `json:"exercise_title"`
-	StudentHandle          string    `json:"student_handle"`
-	StudentAvatarURL       string    `json:"student_avatar_url"`
+	UUID  string `json:"uuid"`
+	Track struct {
+		Title string `json:"title"`
+	} `json:"track"`
+	Exercise struct {
+		IconURL string `json:"icon_url"`
+		Title   string `json:"title"`
+	} `json:"exercise"`
+	Student struct {
+		Handle    string `json:"handle"`
+		AvatarURL string `json:"avatar_url"`
+	} `json:"student"`
+	Solution struct {
+		UUID string `json:"uuid"`
+	} `json:"solution"`
 	UpdatedAt              time.Time `json:"updated_at"`
 	HaveMentoredPreviously bool      `json:"have_mentored_previously"`
 	IsFavorited            bool      `json:"is_favorited"`
-	Status                 string    `json:"status"`
+	Status                 *string   `json:"status"`
 	TooltipURL             string    `json:"tooltip_url"`
 	URL                    string    `json:"url"`
 }

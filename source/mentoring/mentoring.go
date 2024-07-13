@@ -80,7 +80,7 @@ func (s *MentoringEventSource) handleTrack(track_slug string, ch chan any) {
 
 		for _, a := range diff.Added {
 			ch <- events.MentoringEvent{
-				Track:   a.TrackTitle,
+				Track:   a.Track.Title,
 				Type:    events.NewMentoringRequest,
 				Request: a,
 			}
@@ -88,7 +88,7 @@ func (s *MentoringEventSource) handleTrack(track_slug string, ch chan any) {
 
 		for _, d := range diff.Removed {
 			ch <- events.MentoringEvent{
-				Track:   d.TrackTitle,
+				Track:   d.Track.Title,
 				Type:    events.MentoringRequestDeleted,
 				Request: d,
 			}

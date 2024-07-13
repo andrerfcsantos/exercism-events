@@ -84,11 +84,11 @@ func ToRequest(event events.MentoringEvent) repository.MentoringRequest {
 
 	return repository.MentoringRequest{
 		UUID:             event.Request.UUID,
-		TrackTitle:       event.Request.TrackTitle,
-		ExerciseIconURL:  event.Request.ExerciseIconURL,
-		ExerciseTitle:    event.Request.ExerciseTitle,
-		StudentHandle:    event.Request.StudentHandle,
-		StudentAvatarUrl: event.Request.StudentAvatarURL,
+		TrackTitle:       event.Request.Track.Title,
+		ExerciseIconURL:  event.Request.Exercise.IconURL,
+		ExerciseTitle:    event.Request.Exercise.Title,
+		StudentHandle:    event.Request.Student.Handle,
+		StudentAvatarUrl: event.Request.Student.AvatarURL,
 		UpdatedAt:        event.Request.UpdatedAt,
 		AddedAt:          time.Now(),
 		Action:           action,

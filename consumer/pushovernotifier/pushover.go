@@ -74,7 +74,7 @@ func (d *PushoverNotifier) handleEvent(event interface{}) {
 		switch ev.Type {
 		case events.NewMentoringRequest:
 			title = fmt.Sprintf("[%s] New Solution", ev.Track)
-			description = fmt.Sprintf("%s by %s", request.ExerciseTitle, request.StudentHandle)
+			description = fmt.Sprintf("%s by %s", request.Exercise.Title, request.Student.Handle)
 
 			message := pushover.NewMessageWithTitle(description, title)
 			_, err := d.push.SendMessage(message, d.recipient)
@@ -84,7 +84,7 @@ func (d *PushoverNotifier) handleEvent(event interface{}) {
 
 		case events.MentoringRequestDeleted:
 			title = fmt.Sprintf("[%s] Solution Mentored", ev.Track)
-			description = fmt.Sprintf("%s by %s", request.ExerciseTitle, request.StudentHandle)
+			description = fmt.Sprintf("%s by %s", request.Exercise.Title, request.Student.Handle)
 			message := pushover.NewMessageWithTitle(description, title)
 			_, err := d.push.SendMessage(message, d.recipient)
 			if err != nil {

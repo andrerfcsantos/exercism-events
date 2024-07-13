@@ -66,7 +66,7 @@ func (d *DesktopNotifier) handleEvent(event interface{}) {
 		switch ev.Type {
 		case events.NewMentoringRequest:
 			title = fmt.Sprintf("[%s] New Solution", ev.Track)
-			description = fmt.Sprintf("%s by %s", request.ExerciseTitle, request.StudentHandle)
+			description = fmt.Sprintf("%s by %s", request.Exercise.Title, request.Student.Handle)
 			err := beeep.Notify(title, description, "assets/exercism.png")
 			if err != nil {
 				fmt.Printf("could not send notification of solution added: %s\n", err.Error())
@@ -74,7 +74,7 @@ func (d *DesktopNotifier) handleEvent(event interface{}) {
 
 		case events.MentoringRequestDeleted:
 			title = fmt.Sprintf("[%s] Solution Mentored", ev.Track)
-			description = fmt.Sprintf("%s by %s", request.ExerciseTitle, request.StudentHandle)
+			description = fmt.Sprintf("%s by %s", request.Exercise.Title, request.Student.Handle)
 			err := beeep.Notify(title, description, "assets/exercism.png")
 			if err != nil {
 				fmt.Printf("could not send notification of solution mentored: %s\n", err.Error())
