@@ -72,7 +72,7 @@ func (s *MentoringEventSource) handleTrack(track_slug string, ch chan any) {
 
 		req, err := client.GetAllMentoringRequests(track_slug)
 		if err != nil {
-			fmt.Printf("[Mentoring Requests] error getting mentoring requests: %v", err)
+			fmt.Printf("[Mentoring Requests] error getting mentoring requests: %v\n", err)
 			continue
 		}
 

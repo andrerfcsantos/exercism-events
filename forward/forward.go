@@ -32,7 +32,7 @@ func (f *Forwarder) Start() error {
 		go func(source source.Source) {
 			ch, err := source.Start()
 			if err != nil {
-				fmt.Printf("could not start source: %s", err)
+				fmt.Printf("could not start source: %s\n", err)
 				return
 			}
 

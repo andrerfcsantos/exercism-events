@@ -66,7 +66,7 @@ func (s *NotificationEventSource) handleNotifications(ch chan any) {
 
 		req, err := client.GetAllUnreadNotifications()
 		if err != nil {
-			fmt.Printf("[Exercism Notifications] error getting unread notifications: %v", err)
+			fmt.Printf("[Exercism Notifications] error getting unread notifications: %v\n", err)
 			continue
 		}
 
